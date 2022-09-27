@@ -12,20 +12,28 @@ const MainNav = () => (
       Home
     </NavLink>
     <NavLink
+      to="/todos"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      Todos
+    </NavLink>
+    <NavLink
+      to="/calendar"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      Calendar
+    </NavLink>
+    <NavLink
       to="/profile"
       exact
       className="nav-link"
       activeClassName="router-link-exact-active"
     >
       Profile
-    </NavLink>
-    <NavLink
-      to="/external-api"
-      exact
-      className="nav-link"
-      activeClassName="router-link-exact-active"
-    >
-      External API
     </NavLink>
   </div>
 );
