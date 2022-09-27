@@ -1,53 +1,51 @@
 import React, { Component } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
+import TodoDropSection from "./todo-drop-section";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const Container = styled.div``;
 
 export default class TodoSelection extends Component{
+    state = {
+        todos: {
+            'todo-1': {id: 'todo-1', title: 'first'},
+            'todo-2': {id: 'todo-2', title: 'second'},
+            'todo-3': {id: 'todo-3', title: 'third'},
+            'todo-4': {id: 'todo-4', title: 'fourth'},
+        },
+        columns: {
+            'pending':  {
+                id: 'pending',
+                title: 'Pending',
+                todoIds: ['todo-4', 'todo-3']
+            }
+            // 'inProgress': {
+            //     id: 'inProgress',
+            //     title: 'In Progress',
+            //     todosIds: ['todo-2']
+            // },
+            // 'done': {
+            //     id: 'done',
+            //     title: 'Done',
+            //     todosIds: ['todo-1']
+            // }
+        },
+        columnOrder: ['pending']
+    };
 
     onDragEnd = result => {
         //DO somehting
     }
 
     render(){
-       return(
-        <DragDropContext
-            onDragEnd={this.onDragEnd}>
-        <div className="row">
-            <div className="col-4">
-                <Droppable droppableId="pending">
-                    {(provided) => (
-                        <Container {...provided.droppableProps} ref={provided.innerRef} >
-                        <Draggable draggableId="1" index={1}>
-                            {(provided) => {
-                                return <Container {...provided.draggableProps} 
-                                    {...provided.dragHandleProps}
-                                    ref={provided.innerRef}>
-                                        Draggable
-                                    </Container>
-                            }}
-                        </Draggable>
-                        {provided.placeholder}
-                        </Container>
-                    )}
-                </Droppable>
-            </div>
-            <div className="col-4">
-                <Droppable droppableId="in-progress">
-                    {(provided) => (
-                        <Container {...provided.droppableProps} ref={provided.innerRef}>
-                            Second droppable
-                            {provided.placeholder}
-                        </Container>
-                    )}
-                </Droppable>
-            </div>
-            <div className="col-4">
-
-            </div>
-        </div>
-        </DragDropContext>
-       ) 
+       return (
+        <DragDropContext onDragEnd={this.onDragEnd}>{
+            this.state.columnOrder.map(columnId => {
+            const column = this.state.columns[columnId];
+            const todos = column.todoIds.map(todoId => this.state.todos[todoId]);
+            return <TodoDropSection key={column.id} column={column} todos={todos} />;
+           })}
+       </DragDropContext>
+       )
     }
 }
