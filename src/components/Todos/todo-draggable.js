@@ -8,7 +8,6 @@ const Container = styled.div`
 
 export default class TodoDraggable extends React.Component{
     render(){
-        console.log(this.props.todo);
         return (
             <Draggable draggableId={this.props.todo.id} index={this.props.index}>
                 {(provided) => (
