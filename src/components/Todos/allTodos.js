@@ -69,7 +69,7 @@ export default class AllTodos extends React.Component{
         //Max pages
         const numOfTodos = Object.keys(this.props.todos).length;
         let maxPages = Math.floor(numOfTodos / 10);
-        if(numOfTodos % 10 != 0){
+        if(numOfTodos % 10 !== 0){
             maxPages += 1
         }
 
@@ -133,7 +133,7 @@ export default class AllTodos extends React.Component{
     render(){
         const numOfTodos = Object.keys(this.state.todos).length;
         let pages = Math.floor(numOfTodos / 10);
-        if(numOfTodos % 10 != 0){
+        if(numOfTodos % 10 !== 0){
             pages += 1
         }
 
