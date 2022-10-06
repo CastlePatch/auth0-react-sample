@@ -1,28 +1,28 @@
 const initialData = {
-    todos: {
-        'todo-1': {id: 'todo-1', title: 'first'},
-        'todo-2': {id: 'todo-2', title: 'second'},
-        'todo-3': {id: 'todo-3', title: 'third'},
-        'todo-4': {id: 'todo-4', title: 'fourth'},
-    },
+    todos: {},
     columns: {
         'pending':  {
             id: 'pending',
             title: 'Pending',
-            todoIds: ['todo-4', 'todo-3']
+            todoIds: []
         },
         'inProgress': {
             id: 'inProgress',
             title: 'In Progress',
-            todoIds: ['todo-2']
+            todoIds: []
         },
         'done': {
             id: 'done',
             title: 'Done',
-            todoIds: ['todo-1']
+            todoIds: []
+        },
+        'trash': {
+            id: 'trash',
+            title: 'Trash',
+            todoIds: []
         }
     },
-    columnOrder: ['pending', 'inProgress', 'done']
+    columnOrder: ['pending', 'inProgress', 'done', 'trash']
 };
 
 export default initialData;

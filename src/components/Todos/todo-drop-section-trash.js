@@ -3,23 +3,31 @@ import styled from "styled-components";
 import TodoDraggable from "./todo-draggable";
 import { Droppable } from "react-beautiful-dnd";
 import './todo-drop-section.css';
-import TodoDropSectionTrash from "./todo-drop-section-trash";
 
 const Container = styled.div``;
 const TodoList = styled.div`
     height: 100%;
 `;
+const Heading = styled.div`
+    max-width: 100%;
+    margin-bottom: 10px;
+    padding-top: 10px;
+`;
 
-export default class TodoDropSection extends React.Component{
+export default class TodoDropSectionTrash extends React.Component{
     
+    removeTodos = () => {
+        this.props.removeTodos();
+    }
+
     render(){
-        if(this.props.column.id === 'trash'){
-            return <TodoDropSectionTrash {...this.props} removeTodos={this.props.removeTodos} />
-        }
-        let className = "col droppable";
         return (
-            <Container className={className}>
-                <h1 className="h3">{this.props.column.title}</h1>
+            <Container className="col droppable">
+                <Heading className="row">
+                    <h1 className="col h3">{this.props.column.title}</h1>
+                    <button className="col btn btn-primary" onClick={this.props.removeTodos}>Delete</button>
+                </Heading>
+
                 <Droppable droppableId={this.props.column.id}>
                     {(provided) => (
                     
