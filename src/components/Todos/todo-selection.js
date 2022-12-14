@@ -232,16 +232,62 @@ export default class TodoSelection extends Component{
     permaDeleteTodo = (todoId) => {
             // Get all the todos
             const allTodos = JSON.parse(JSON.stringify(this.state.todos))
-    
-            // Update the todo
-            allTodos[todoId].status = "permaDeleted";
+
             
+            // Update the todo
+            const updatedTodo = {...allTodos[todoId]};
+
+            // Set up the new columns
+            const pendingCol = JSON.parse(JSON.stringify(this.state.columns.pending.todoIds));
+            const inProgressCol = JSON.parse(JSON.stringify(this.state.columns.inProgress.todoIds));
+            const doneCol = JSON.parse(JSON.stringify(this.state.columns.done.todoIds));
+            const trashCol = JSON.parse(JSON.stringify(this.state.columns.trash.todoIds));
+
+            var index = pendingCol.indexOf(todoId);
+            if(index !== -1){
+                pendingCol.splice(index, 1);
+            }
+
+            index = inProgressCol.indexOf(todoId);
+            if(index !== -1){
+                inProgressCol.splice(index, 1);
+            }
+
+            index = doneCol.indexOf(todoId);
+            if(index !== -1){
+                doneCol.splice(index, 1);
+            }
+
+            index = trashCol.indexOf(todoId);
+            if(index !== -1){
+                trashCol.splice(index, 1);
+            }
+
+            updatedTodo.status = "permaDeleted";
+            delete allTodos[todoId];
+
+            allTodos[todoId] = updatedTodo;
+
             // Update state and save
             const newState = {
                 ...this.state,
-                todos: allTodos
+                todos: allTodos,
+                columns:
+                    {
+                        done: {...this.state.columns.done,
+                            todoIds: doneCol
+                        },
+                        inProgress: {...this.state.columns.inProgress,
+                            todoIds: inProgressCol
+                        },
+                        pending: {...this.state.columns.pending,
+                            todoIds: pendingCol
+                        },
+                        trash: {...this.state.columns.trash,
+                            todoIds: trashCol}
+                }
             }
-            
+
             this.setState(newState);
             this.saveData(newState);
     }

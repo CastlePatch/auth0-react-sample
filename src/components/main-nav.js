@@ -20,6 +20,14 @@ const MainNav = () => (
       Todos
     </NavLink>
     <NavLink
+      to="/groceries"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      Groceries
+    </NavLink>
+    <NavLink
       to="/calendar"
       exact
       className="nav-link"
