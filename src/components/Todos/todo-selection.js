@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import TodoDropSection from "./todo-drop-section";
+import TodoDropSection from "./Kanban/todo-drop-section";
 import { DragDropContext } from "react-beautiful-dnd";
 import initialData from "./initialData";
-import AddTodo from "./AddTodo";
+import AddTodo from "./Kanban/AddTodo";
 import AllTodos from "./allTodos";
+import './todo-selection.css';
 
 const Container = styled.div``;
 
@@ -301,7 +302,7 @@ export default class TodoSelection extends Component{
         <React.Fragment>
             <AddTodo addTodo={this.addTodo} />
             <DragDropContext onDragEnd={this.onDragEnd}>
-                <Container className="row row-cols-3">
+                <Container className="row row-col-3 gap">
                     {this.state.columnOrder.map(columnId => {
                     const column = this.state.columns[columnId];
                     let todos = [];
