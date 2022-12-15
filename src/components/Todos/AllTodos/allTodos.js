@@ -1,5 +1,5 @@
 import React from "react";
-import NavigationButtons from "../Utilities/navigation-buttons";
+import NavigationButtons from "../../Utilities/navigation-buttons";
 import TableTodo from "./table-todo";
 import './allTodos.css';
 

@@ -4,7 +4,7 @@ import TodoDropSection from "./Kanban/todo-drop-section";
 import { DragDropContext } from "react-beautiful-dnd";
 import initialData from "./initialData";
 import AddTodo from "./Kanban/AddTodo";
-import AllTodos from "./allTodos";
+import AllTodos from "./AllTodos/allTodos";
 import './todo-selection.css';
 
 const Container = styled.div``;
@@ -292,6 +292,7 @@ export default class TodoSelection extends Component{
             this.setState(newState);
             this.saveData(newState);
     }
+
     render = () => {
         if(this.state.todos === null)
             return null;
